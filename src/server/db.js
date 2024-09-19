@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
+const config = require('./config/index.js');
 
-const uri =
-  'mongodb+srv://JobApplicationUser:hgrW3WGcjZan9vhm@cluster1.umbgx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1';
+const uri = config.db.uri;
 
 const connectDB = () => {
   return mongoose

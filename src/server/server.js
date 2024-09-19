@@ -1,35 +1,32 @@
+// const path = require('path');
 const express = require('express');
-const mongoose = require('mongoose');
-const connectDB = require('./db');
-
 const app = express();
+const apiRouter = require('./routes/api');
 
-import applicationController from './applicationController.js';
+const PORT = 3000;
 
-connectDB();
+//status checks
+app.get('/status', (req, res) => res.sendStatus(200));
+app.head('/status', (req, res) => res.sendStatus(200));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
-app.get('/status', (req, res) => {
-  res.sendStatus(200);
-});
+app.use(apiRouter);
 
-app.get('/', applicationController.getAllApplications, (req, res) => {
-  res.send(res.locals.allApps);
-});
+//error handler for unknown routes
+app.use((req, res) => res.status(404).send('Page not found'));
 
-app.post('/', applicationController.addApplication, (req, res) => {
-  res.send(res.locals.done);
-});
-
+//global error handler
 app.use((err, req, res, next) => {
   console.log(err);
   res.status(500).send({ error: err });
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log('Server is listening on Port 3000!');
 });
+
+module.exports = app;
