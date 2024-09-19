@@ -1,0 +1,9 @@
+# environment variables
+.env
+
+#production code
+dist/
+public/js
+
+node_modules/
+
