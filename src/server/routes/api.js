@@ -12,11 +12,19 @@ router.get('/status', (req, res) => {
   res.sendStatus(200);
 });
 
-router.get('/', applicationController.getAllApplications, (req, res) => {
+router.get('/allapps', applicationController.getAllApplications, (req, res) => {
   res.send(res.locals.allApps);
 });
 
-router.post('/', applicationController.addApplication, (req, res) => {
+// router.get(
+//   '/:id',
+//   applicationController.getIndividualApplication,
+//   (req, res) => {
+//     res.send(res.locals.allApps);
+//   }
+// );
+
+router.post('/allapps', applicationController.addApplication, (req, res) => {
   res.send(res.locals.done);
 });
 

@@ -15,6 +15,7 @@ applicationController.addApplication = async (req, res, next) => {
     receivedResponse,
     notes,
   } = req.body;
+  console.log(`LOOK HERE ${req.body}`);
   try {
     const newApplication = new Application({
       dateApplied,
@@ -55,5 +56,22 @@ applicationController.getAllApplications = async (req, res, next) => {
     });
   }
 };
+
+// applicationController.getIndividualApplication = async (req, res, next) => {
+//   try {
+//     const id = req.params.id;
+//     const results = await Application.findOne(id);
+//     res.body.results = results;
+//     return next();
+//   } catch (err) {
+//     return next({
+//       log: `applicationController.getIndividualApplication ERROR: ${err}`,
+//       message: {
+//         err: 'Error occured in applicationController.getIndividualApplication',
+//       },
+//       status: 500,
+//     });
+//   }
+// };
 
 export default applicationController;

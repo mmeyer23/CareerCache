@@ -1,9 +1,11 @@
 import React from 'react';
 
+import MainContainer from './containers/MainContainer.jsx';
+
 const App = (props) => {
   return (
     <div>
-      <h1>This is cool!!!!</h1>
+      <MainContainer />
     </div>
   );
 };
