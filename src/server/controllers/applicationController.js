@@ -44,6 +44,7 @@ applicationController.addApplication = async (req, res, next) => {
 applicationController.getAllApplications = async (req, res, next) => {
   try {
     const allApps = await Application.find();
+    console.log(allApps);
     res.locals.allApps = allApps;
     return next();
   } catch (err) {
@@ -51,6 +52,31 @@ applicationController.getAllApplications = async (req, res, next) => {
       log: `applicationController.getAllApplications ERROR: ${err}`,
       message: {
         err: 'Error occured in applicationController.getAllApplications',
+      },
+      status: 500,
+    });
+  }
+};
+
+applicationController.deleteApplication = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const deletedApp = await Application.findOneAndDelete({ _id: id });
+    if (!deletedApp) {
+      return next({
+        log: `applicationController.deleteApplication ERROR: ${err}`,
+        message: {
+          err: 'Cannot find application',
+        },
+        status: 404,
+      });
+    }
+    return next();
+  } catch (err) {
+    return next({
+      log: `applicationController.deleteApplication ERROR: ${err}`,
+      message: {
+        err: 'Error occured in applicationController.deleteApplication',
       },
       status: 500,
     });

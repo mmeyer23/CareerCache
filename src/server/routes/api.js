@@ -28,4 +28,12 @@ router.post('/allapps', applicationController.addApplication, (req, res) => {
   res.send(res.locals.done);
 });
 
+router.delete(
+  '/allapps/:id',
+  applicationController.deleteApplication,
+  (req, res) => {
+    res.sendStatus(204);
+  }
+);
+
 module.exports = router;
